@@ -1,0 +1,73 @@
+From 8bcf2ca5232dcba2ec11751ca179597b41b5f625 Mon Sep 17 00:00:00 2001
+From: Arian <arian.kulmer@web.de>
+Date: Fri, 8 Mar 2024 02:11:53 +0100
+Subject: [PATCH 2/6] Support third party galleries
+
+---
+ smali/com/android/camera/t3.smali             |  8 ++-----
+ .../provider/ParallelProcessProvider.smali    | 22 -------------------
+ 2 files changed, 2 insertions(+), 28 deletions(-)
+
+diff --git a/smali/com/android/camera/t3.smali b/smali/com/android/camera/t3.smali
+index 18d6513..1ef0fe7 100644
+--- a/smali/com/android/camera/t3.smali
++++ b/smali/com/android/camera/t3.smali
+@@ -254,9 +254,9 @@
+ 
+     invoke-direct {v1, v2}, Landroid/content/Intent;-><init>(Ljava/lang/String;)V
+ 
+-    const-string v2, "com.miui.gallery"
++    const-string v2, "android.intent.category.APP_GALLERY"
+ 
+-    invoke-virtual {v1, v2}, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
++    invoke-virtual {v1, v2}, Landroid/content/Intent;->addCategory(Ljava/lang/String;)Landroid/content/Intent;
+ 
+     iget-object v2, p0, Lcom/android/camera/t3;->f:Landroid/content/ServiceConnection;
+ 
+@@ -1203,10 +1203,6 @@
+     invoke-direct {p0, v0, p2}, Landroid/content/Intent;-><init>(Ljava/lang/String;Landroid/net/Uri;)V
+ 
+     :goto_0
+-    const-string p1, "com.miui.gallery"
+-
+-    invoke-virtual {p0, p1}, Landroid/content/Intent;->setPackage(Ljava/lang/String;)Landroid/content/Intent;
+-
+     const-string p1, "from_MiuiCamera"
+ 
+     const/4 p2, 0x1
+diff --git a/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali b/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali
+index 4ba79c7..16ef2f9 100644
+--- a/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali
++++ b/smali_classes4/com/xiaomi/camera/parallelservice/provider/ParallelProcessProvider.smali
+@@ -414,28 +414,6 @@
+ 
+     invoke-static {v0, v3, v2}, Lcom/android/camera/log/Log;->w(Ljava/lang/String;Ljava/lang/String;Ljava/lang/Throwable;)V
+ 
+-    invoke-static {}, Lbb/c;->u2()Lbb/c;
+-
+-    move-result-object v0
+-
+-    invoke-virtual {v0}, Lbb/c;->E2()Z
+-
+-    move-result v0
+-
+-    if-nez v0, :cond_0
+-
+-    invoke-static {}, Lbb/c;->u2()Lbb/c;
+-
+-    move-result-object v0
+-
+-    invoke-virtual {v0}, Lbb/c;->F2()Z
+-
+-    move-result v0
+-
+-    if-nez v0, :cond_0
+-
+-    const/4 v1, 0x4
+-
+     :cond_0
+     :goto_0
+     return v1
+-- 
+2.43.0
+

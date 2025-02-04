@@ -33,6 +33,9 @@ lib_fixups: lib_fixups_user_type = {
 }
 
 blob_fixups: blob_fixups_user_type = {
+    'system_ext/priv-app/MiuiCamera/MiuiCamera.apk': blob_fixup()
+        .apktool_patch('patches/'),
+
     ('system_ext/lib64/libcamera_algoup_jni.xiaomi.so',
      'system_ext/lib64/libcamera_mianode_jni.xiaomi.so',
      'system_ext/lib64/libcamera_ispinterface_jni.xiaomi.so'): blob_fixup()
