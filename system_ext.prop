@@ -1,4 +1,5 @@
 persist.vendor.camera.privapp.list=com.android.camera
 ro.com.google.lens.oem_camera_package=com.android.camera
+ro.product.mod_device=duchamp_global
 ro.miui.notch=1
 vendor.camera.aux.packagelist=com.android.camera
